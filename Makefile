@@ -3,3 +3,7 @@ provision:
 
 test:
 	@go test ./...
+
+goconvey:
+	$$GOPATH/bin/goconvey
+
