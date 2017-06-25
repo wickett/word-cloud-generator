@@ -1,8 +1,8 @@
-provision:
-	go run main.go provision -s wickett-sparta
-
 test:
 	@go test ./...
+
+run:
+	@go run main.go
 
 goconvey:
 	$$GOPATH/bin/goconvey
