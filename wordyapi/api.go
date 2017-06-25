@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"strings"
-
-	"github.com/wickett/wordy/ignorewords"
 )
 
 type TextToParse struct {
@@ -20,9 +18,6 @@ func ParseText(input TextToParse) []byte {
 	//fmt.Printf("%q\n", words)
 	m := map[string]int{}
 	for _, word := range words {
-		if ignorewords.IsUseless(word) {
-			delete(m, word)
-		}
 		m[word] = m[word] + 1
 	}
 
