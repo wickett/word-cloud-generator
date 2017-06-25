@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -9,11 +10,18 @@ import (
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
 
-// PostHandler converts post request body to string
-func PostHandler(w http.ResponseWriter, r *http.Request) {
-	text := r.FormValue("text")
-	t := wordyapi.TextToParse{"hello", text}
-	fmt.Println(wordyapi.ParseText(t))
+// uploadHandler converts post request body to string
+func uploadHandler(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("templates/upload.tmpl")
+		t.Execute(w, nil)
+	} else if r.Method == "POST" {
+		text := r.FormValue("text")
+		t := wordyapi.TextToParse{"hello", text}
+		fmt.Println(wordyapi.ParseText(t))
+	}
+
 }
 
 func main() {
@@ -22,7 +30,7 @@ func main() {
 
 	fmt.Println(wordyapi.ParseText(x))
 	r := mux.NewRouter()
-	r.HandleFunc("/upload", PostHandler).Methods("POST")
+	r.HandleFunc("/upload", uploadHandler).Methods("POST", "GET")
 	//	r.HandleFunc("/wordy", WordyHandler)
 	http.Handle("/", r)
 
