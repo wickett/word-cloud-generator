@@ -19,16 +19,13 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	} else if r.Method == "POST" {
 		text := r.FormValue("text")
 		t := wordyapi.TextToParse{"hello", text}
-		fmt.Println(wordyapi.ParseText(t))
+		fmt.Println(string(wordyapi.ParseText(t)))
 	}
 
 }
 
 func main() {
 
-	x := wordyapi.TextToParse{"hello", "how are you"}
-
-	fmt.Println(wordyapi.ParseText(x))
 	r := mux.NewRouter()
 	r.HandleFunc("/upload", uploadHandler).Methods("POST", "GET")
 	//	r.HandleFunc("/wordy", WordyHandler)
