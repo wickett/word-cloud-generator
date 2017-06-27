@@ -18,4 +18,4 @@ We use git hooks to standardize development on the project. Please run `make git
 `make goconvey`
 
 ## To Run
-
+`make run`
