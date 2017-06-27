@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WordCloud</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="jqcloud.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jqcloud-1.0.0.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+    console.log( "ready!" );
+    var word_list = new Array();
+
+			var api = "https://ds3m19zf2g.execute-api.us-east-1.amazonaws.com/prod/wordy/lookup/Romans8"
+        $.getJSON(api)
+          .done(function( data ) {
+            console.log("Done");
+            $.each(data, function(index, element) {
+              console.log(index, element);
+              word_list.push({text:index, weight:element});
+          });
+        $("#wordcloud").jQCloud(word_list);
+      })
+    .complete(function() { console.log("complete"); });
+    });
+    </script>
+    <style type="text/css">
+      body {
+        background: #eee;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      #wordcloud {
+        margin: 30px auto;
+        width: 600px;
+        height: 371px;
+        border: none;
+      }
+      #wordcloud span.w10, #wordcloud span.w9, #wordcloud span.w8, #wordcloud span.w7 {
+        text-shadow: 0px 1px 1px #ccc;
+      }
+      #wordcloud span.w3, #wordcloud span.w2, #wordcloud span.w1 {
+        text-shadow: 0px 1px 1px #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wordcloud"></div>
+    <!-- Google Analytics -->
+    <script type='text/javascript'> 
+    </script>
+    <!-- End Google Analytics -->
+  </body>
+</html>
