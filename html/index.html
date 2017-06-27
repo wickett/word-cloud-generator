@@ -16,7 +16,7 @@
     console.log( "ready!" );
     var word_list = new Array();
 
-			var api = "https://ds3m19zf2g.execute-api.us-east-1.amazonaws.com/prod/wordy/lookup/Romans8"
+			var api = "http://localhost:8888/results"
         $.getJSON(api)
           .done(function( data ) {
             console.log("Done");
