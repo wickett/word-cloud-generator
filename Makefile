@@ -13,7 +13,7 @@ artifact: clean
 
 clean:
 	@echo "First, cleaning up previous the build"
-	@rm ./artifact/word-cloud-generator
+	@rm -f ./artifact/word-cloud-generator
 
 install:
 	@echo "Installs to $$GOPATH/bin"
