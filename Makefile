@@ -1,5 +1,5 @@
 test:
-	@go test ./...
+	@go test $$(go list ./...|grep -v vendor)
 
 run:
 	@go run main.go
