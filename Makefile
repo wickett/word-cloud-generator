@@ -12,7 +12,7 @@ artifact: clean
 	@go build -o ./artifact/word-cloud-generator ./main.go
 
 clean:
-	@echo "First, cleaning up previous the build"
+	@echo "First, cleaning up the previous build"
 	@rm -f ./artifact/word-cloud-generator
 
 install:
