@@ -14,6 +14,13 @@ This project is under active development. This project is being created as a sam
 ## Git
 We use git hooks to standardize development on the project. Please run `make git-hooks` to get started.
 
+## To Compile
+This will compile a linux, mac and windows binary in ./artifacts
+
+```
+make compile
+```
+
 ## Test Coverage
 `make test`
 

@@ -17,4 +17,6 @@
 .idea/
 
 # artifacts
-artifact/word-cloud-generator
+artifacts/osx
+artifacts/windows
+artifacts/linux
