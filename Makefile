@@ -7,7 +7,11 @@ run:
 goconvey:
 	$$GOPATH/bin/goconvey
 
-artifact: clean
+godep:
+	@echo "Restoring dependencies..."
+	@godep restore
+
+artifact: clean godep
 	@echo "Creating a build as ./artifact/word-cloud-generator"
 	@go build -o ./artifact/word-cloud-generator ./main.go
 
