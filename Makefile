@@ -11,7 +11,7 @@ godep:
 	@echo "Restoring dependencies..."
 	@godep restore
 
-compile: clean godep
+compile: clean godep test
 	@echo "Creating cross compiled builds in ./artifacts"
 	@env GOOS=darwin GOARCH=amd64 go build -o ./artifacts/osx/word-cloud-generator -v .
 	@env GOOS=linux GOARCH=amd64 go build -o ./artifacts/linux/word-cloud-generator -v .

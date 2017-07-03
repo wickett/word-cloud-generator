@@ -18,7 +18,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, nil)
 	} else if r.Method == "POST" {
 		text := r.FormValue("text")
-		t := wordyapi.TextToParse{"hello", text}
+		t := wordyapi.TextToParse{Title: "hello", Text: text}
 		fmt.Println(string(wordyapi.ParseText(t)))
 	}
 
