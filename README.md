@@ -29,3 +29,8 @@ make compile
 
 ## To Run
 `make run`
+
+## Use API via Curl
+```
+$ curl -X POST -F "text=This application returns a wordcount JSON object for use in an application" http://localhost:8888/api
+```
