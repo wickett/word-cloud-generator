@@ -11,15 +11,16 @@ godep:
 	@echo "Restoring dependencies..."
 	@godep restore
 
-compile: clean godep test
-	@echo "Creating cross compiled builds in ./artifacts"
+all: clean godep test
+	@echo "Creating compiled builds in ./artifacts"
 	@env GOOS=darwin GOARCH=amd64 go build -o ./artifacts/osx/word-cloud-generator -v .
 	@env GOOS=linux GOARCH=amd64 go build -o ./artifacts/linux/word-cloud-generator -v .
 	@env GOOS=windows GOARCH=amd64 go build -o ./artifacts/windows/word-cloud-generator -v .
+	@ls -lR ./artifacts
 
 clean:
-	@echo "First, cleaning up the previous build"
-	@rm -f ./artifact/word-cloud-generator
+	@echo "Cleaning up the previous build"
+	@rm -rf ./artifacts/*
 
 install:
 	@echo "Installs to $$GOPATH/bin"
@@ -29,3 +30,5 @@ git-hooks:
 	test -d .git/hooks || mkdir -p .git/hooks
 	cp -f hooks/git-pre-commit.hook .git/hooks/pre-commit
 	chmod a+x .git/hooks/pre-commit
+
+.PHONY: all install clean
