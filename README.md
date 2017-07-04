@@ -14,21 +14,31 @@ This project is under active development. This project is being created as a sam
 ## Git
 We use git hooks to standardize development on the project. Please run `make git-hooks` to get started.
 
-## To Compile
-This will compile a linux, mac and windows binary in ./artifacts
+## Using Make
 
-```
-make compile
-```
+### Building Artifacts
+This will pull down dependencies, run unit tests, and compile a linux, mac and windows binary into ./artifacts.
 
-## Test Coverage
+`make`
+
+### Fiddling Around
+
+You can build and install a copy in your local $GOPATH/bin directory with:
+
+```make install```
+
+### Clean up previous build files
+
+`make clean`
+
+### Test Coverage
 `make test`
 
-## Visual Test Coverage
+### Visual Test Coverage
 `make goconvey`
 
-## To Run
-`make run`
+### To Run
+`make run` or just run the executable.  It will run as a daemon and bind to port 8888, and you can see it by going to http://localhost:8888 in your browser.
 
 ## Use API via Curl
 ```
