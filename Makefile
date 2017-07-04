@@ -1,3 +1,7 @@
+BINARY=word-cloud-generator
+
+all: clean godep test build
+
 test:
 	@go test $$(go list ./...|grep -v vendor)
 
@@ -11,24 +15,31 @@ godep:
 	@echo "Restoring dependencies..."
 	@godep restore
 
-all: clean godep test
+build:
 	@echo "Creating compiled builds in ./artifacts"
-	@env GOOS=darwin GOARCH=amd64 go build -o ./artifacts/osx/word-cloud-generator -v .
-	@env GOOS=linux GOARCH=amd64 go build -o ./artifacts/linux/word-cloud-generator -v .
-	@env GOOS=windows GOARCH=amd64 go build -o ./artifacts/windows/word-cloud-generator -v .
+	@env GOOS=darwin GOARCH=amd64 go build -o ./artifacts/osx/${BINARY} -v .
+	@env GOOS=linux GOARCH=amd64 go build -o ./artifacts/linux/${BINARY} -v .
+	@env GOOS=windows GOARCH=amd64 go build -o ./artifacts/windows/${BINARY} -v .
 	@ls -lR ./artifacts
 
 clean:
-	@echo "Cleaning up the previous build"
+	@echo "Cleaning up previous builds"
+	@go clean
 	@rm -rf ./artifacts/*
 
 install:
 	@echo "Installs to $$GOPATH/bin"
 	@go build ./main.go
+	@go install
+
+uninstall:
+	@echo "Removing from $$GOPATH/bin"
+	@go clean -i
 
 git-hooks:
 	test -d .git/hooks || mkdir -p .git/hooks
 	cp -f hooks/git-pre-commit.hook .git/hooks/pre-commit
 	chmod a+x .git/hooks/pre-commit
 
-.PHONY: all install clean
+.PHONY: all install uninstall clean
+.DEFAULT_GOAL := all
