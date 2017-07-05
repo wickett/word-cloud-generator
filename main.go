@@ -23,10 +23,11 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
 	r := mux.NewRouter()
 	r.HandleFunc("/api", uploadHandler).Methods("POST")
 	r.HandleFunc("/", mainHandler).Methods("GET")
+	// This will serve files under in /static as /static/k<filename>
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8888", r))
