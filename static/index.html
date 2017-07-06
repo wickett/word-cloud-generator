@@ -9,26 +9,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="jqcloud.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="jqcloud-1.0.0.min.js"></script>
-    <script>
-    $( document ).ready(function() {
-    console.log( "ready!" );
-    var word_list = new Array();
-
-			var api = "http://localhost:8888/results"
-        $.getJSON(api)
-          .done(function( data ) {
-            console.log("Done");
-            $.each(data, function(index, element) {
-              console.log(index, element);
-              word_list.push({text:index, weight:element});
-          });
-        $("#wordcloud").jQCloud(word_list);
-      })
-    .complete(function() { console.log("complete"); });
-    });
-    </script>
     <style type="text/css">
       body {
         background: #eee;
@@ -49,6 +31,41 @@
     </style>
   </head>
   <body>
-    <div id="wordcloud"></div>
+<form action="/api" id="wordcloudForm" >
+  <input type="text" name="text" placeholder="Enter text here...">
+  <input type="submit" value="Submit">
+</form>
+<div id="wordcloud"></div>
+<script>
+
+$( "#wordcloudForm" ).submit(function( event ) {
+  // Stop form from submitting normally
+  event.preventDefault();
+  var word_list = new Array();
+
+  // Get the values from elements on the page:
+  var $form = $( this ),
+  entered = $form.find( "input[name='text']" ).val(),
+  url = $form.attr( "action" );
+
+  // Send the data using post
+  var posting = $.post( url, { text: entered } );
+
+  posting.done(function( data ) {
+
+    console.log("Received response from server...");
+    console.log(data);
+    $.each(data, function(index, element) {
+      console.log(index, element);
+      word_list.push({text:index, weight:element});
+    });
+    $("#wordcloud").jQCloud(word_list);
+  })
+
+  .complete(function() { console.log("complete"); });
+
+});
+
+</script>
   </body>
 </html>
