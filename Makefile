@@ -9,7 +9,10 @@ run:
 	@go run main.go
 
 start-mac: build
-	./artifact/osx/word-cloud-generator
+	./artifacts/osx/word-cloud-generator
+
+rice:
+	@rice embed-go
 
 goconvey:
 	$$GOPATH/bin/goconvey

@@ -10,6 +10,7 @@ This project is under active development. This project is being created as a sam
 3. Set $PATH `export PATH=$PATH:$(go env GOPATH)/bin`
 4. Install godep - `go get github.com/tools/godep`
 5. Install goconvey - `go get github.com/smartystreets/goconvey`
+5. Install rice - `go get github.com/GeertJohan/go.rice/rice`
 
 ## Git
 We use git hooks to standardize development on the project. Please run `make git-hooks` to get started.
@@ -25,17 +26,29 @@ This will pull down dependencies, run unit tests, and compile a linux, mac and w
 
 You can build and install a copy in your local $GOPATH/bin directory with:
 
-```make install```
+```
+make install
+```
 
 ### Clean up previous build files
-
-`make clean`
+```
+make clean
+```
 
 ### Test Coverage
-`make test`
+```
+make test
+```
 
 ### Visual Test Coverage
-`make goconvey`
+```
+make goconvey
+```
+
+### Bundle HTML and JS
+```
+make rice
+```
 
 ### To Run
 `make run` or just run the executable.  It will run as a daemon and bind to port 8888, and you can see it by going to http://localhost:8888 in your browser.
