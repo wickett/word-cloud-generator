@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	rice "github.com/GeertJohan/go.rice"
 	mux "github.com/gorilla/mux"
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
@@ -25,9 +26,11 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api", uploadHandler).Methods("POST")
-	r.HandleFunc("/", mainHandler).Methods("GET")
-	// This will serve files under in /static as /static/k<filename>
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	//	r.HandleFunc("/", mainHandler).Methods("GET")
+	// This will serve files under in /static as /static/<filename>
+	//	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	http.Handle("/", http.FileServer(rice.MustFindBox("./static").HTTPBox()))
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8888", r))
