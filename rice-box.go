@@ -40,8 +40,8 @@ func init() {
 	dir1.ChildDirs = []*embedded.EmbeddedDir{}
 
 	// register embeddedBox
-	embedded.RegisterEmbeddedBox(`./static`, &embedded.EmbeddedBox{
-		Name: `./static`,
+	embedded.RegisterEmbeddedBox(`static`, &embedded.EmbeddedBox{
+		Name: `static`,
 		Time: time.Unix(1499369884, 0),
 		Dirs: map[string]*embedded.EmbeddedDir{
 			"": dir1,

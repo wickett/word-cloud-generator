@@ -8,6 +8,9 @@ test:
 run:
 	@go run main.go
 
+start-mac: build
+	./artifact/osx/word-cloud-generator
+
 goconvey:
 	$$GOPATH/bin/goconvey
 

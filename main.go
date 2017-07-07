@@ -30,7 +30,7 @@ func main() {
 	// This will serve files under in /static as /static/<filename>
 	//	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
-	http.Handle("/", http.FileServer(rice.MustFindBox("./static").HTTPBox()))
+	r.PathPrefix("/").Handler(http.FileServer(rice.MustFindBox("static").HTTPBox()))
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8888", r))
