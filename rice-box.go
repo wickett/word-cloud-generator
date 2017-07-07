@@ -23,15 +23,21 @@ func init() {
 		FileModTime: time.Unix(1498528613, 0),
 		Content:     string("div#wordcloud {\n  font-family: \"Helvetica\", \"Arial\", sans-serif;\n  color: #09f;\n  overflow: hidden;\n  position: relative;\n}\ndiv#wordcloud a {\n  color: inherit;\n  text-decoration: none;\n}\ndiv#wordcloud a:hover {\n  color: #0df;\n}\ndiv#wordcloud a:hover {\n  color: #0cf;\n}\ndiv#wordcloud span {\n  padding: 0;\n}\ndiv#wordcloud span.w10 {\n  font-size: 54px;\n  color: #0cf;\n}\ndiv#wordcloud span.w9 {\n  font-size: 50px;\n  color: #0cf;\n}\ndiv#wordcloud span.w8 {\n  font-size: 44px;\n  color: #0cf;\n}\ndiv#wordcloud span.w7 {\n  font-size: 40px;\n  color: #39d;\n}\ndiv#wordcloud span.w6 {\n  font-size: 34px;\n  color: #90c5f0;\n}\ndiv#wordcloud span.w5 {\n  font-size: 30px;\n  color: #90a0dd;\n}\ndiv#wordcloud span.w4 {\n  font-size: 24px;\n  color: #90c5f0;\n}\ndiv#wordcloud span.w3 {\n  font-size: 20px;\n  color: #a0ddff;\n}\ndiv#wordcloud span.w2 {\n  font-size: 14px;\n  color: #99ccee;\n}\ndiv#wordcloud span.w1 {\n  font-size: 10px;\n  color: #aab5f0;\n}"),
 	}
+	file5 := &embedded.EmbeddedFile{
+		Filename:    "version.html",
+		FileModTime: time.Unix(1499395280, 0),
+		Content:     string("version:1234\n"),
+	}
 
 	// define dirs
 	dir1 := &embedded.EmbeddedDir{
 		Filename:   "",
-		DirModTime: time.Unix(1499369884, 0),
+		DirModTime: time.Unix(1499395280, 0),
 		ChildFiles: []*embedded.EmbeddedFile{
 			file2, // "index.html"
 			file3, // "jqcloud-1.0.0.min.js"
 			file4, // "jqcloud.css"
+			file5, // "version.html"
 
 		},
 	}
@@ -42,7 +48,7 @@ func init() {
 	// register embeddedBox
 	embedded.RegisterEmbeddedBox(`static`, &embedded.EmbeddedBox{
 		Name: `static`,
-		Time: time.Unix(1499369884, 0),
+		Time: time.Unix(1499395280, 0),
 		Dirs: map[string]*embedded.EmbeddedDir{
 			"": dir1,
 		},
@@ -50,6 +56,7 @@ func init() {
 			"index.html":           file2,
 			"jqcloud-1.0.0.min.js": file3,
 			"jqcloud.css":          file4,
+			"version.html":         file5,
 		},
 	})
 }
