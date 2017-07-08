@@ -25,14 +25,14 @@ func init() {
 	}
 	file5 := &embedded.EmbeddedFile{
 		Filename:    "version",
-		FileModTime: time.Unix(1499395941, 0),
-		Content:     string("1.DEVELOPMENT\n"),
+		FileModTime: time.Unix(1499548250, 0),
+		Content:     string("{ \"version\": \"1.DEVELOPMENT\" }\n"),
 	}
 
 	// define dirs
 	dir1 := &embedded.EmbeddedDir{
 		Filename:   "",
-		DirModTime: time.Unix(1499395968, 0),
+		DirModTime: time.Unix(1499548250, 0),
 		ChildFiles: []*embedded.EmbeddedFile{
 			file2, // "index.html"
 			file3, // "jqcloud-1.0.0.min.js"
@@ -48,7 +48,7 @@ func init() {
 	// register embeddedBox
 	embedded.RegisterEmbeddedBox(`static`, &embedded.EmbeddedBox{
 		Name: `static`,
-		Time: time.Unix(1499395968, 0),
+		Time: time.Unix(1499548250, 0),
 		Dirs: map[string]*embedded.EmbeddedDir{
 			"": dir1,
 		},
