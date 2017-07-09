@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -43,7 +42,7 @@ func receiveJSON(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Printf(string(body))
+	//fmt.Printf(string(body))
 	if err := r.Body.Close(); err != nil {
 		panic(err)
 	}
