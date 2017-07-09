@@ -1,7 +1,11 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"html/template"
+	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -10,11 +14,15 @@ import (
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
 
-// uploadHandler converts post request body to string
-func uploadHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+type TextSubmission struct {
+	Title string `json:"title"`
+	Text  string `json:"text"`
+}
+
+func formHandler(w http.ResponseWriter, r *http.Request) {
 	text := r.FormValue("text")
 	t := wordyapi.TextToParse{Title: "hello", Text: text}
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(wordyapi.ParseText(t))
 }
 
@@ -23,13 +31,41 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
+// Test json with curl using this:
+// curl -H "Content-Type: application/json" -d '{"text":"this is a really really really important thing this is"}' http://localhost:8888/newapi
+
+func receiveJSON(w http.ResponseWriter, r *http.Request) {
+	var textIn TextSubmission
+
+	// don't allow huge uploads
+	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf(string(body))
+	if err := r.Body.Close(); err != nil {
+		panic(err)
+	}
+	if err := json.Unmarshal(body, &textIn); err != nil {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(422) // unprocessable entity
+		if err := json.NewEncoder(w).Encode(err); err != nil {
+			panic(err)
+		}
+	}
+	t := wordyapi.TextToParse{Title: textIn.Title, Text: textIn.Text}
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Write(wordyapi.ParseText(t))
+}
+
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/api", uploadHandler).Methods("POST")
-	//	r.HandleFunc("/", mainHandler).Methods("GET")
-	// This will serve files under in /static as /static/<filename>
-	//	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	// routes
+	r.HandleFunc("/form", formHandler).Methods("POST")
+	r.HandleFunc("/api", receiveJSON).Methods("POST")
 
+	// serves up our static content like html
 	r.PathPrefix("/").Handler(http.FileServer(rice.MustFindBox("static").HTTPBox()))
 
 	// Bind to a port and pass our router in

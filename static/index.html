@@ -49,7 +49,9 @@ $( "#wordcloudForm" ).submit(function( event ) {
   url = $form.attr( "action" );
 
   // Send the data using post
-  var posting = $.post( url, { text: entered } );
+  // var posting = $.post( url, { text: entered } );
+  var posting = $.post( url, JSON.stringify({ "title": "Hello", "text" : entered }) );
+
 
   posting.done(function( data ) {
 

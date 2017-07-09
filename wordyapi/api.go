@@ -15,7 +15,6 @@ func ParseText(input TextToParse) []byte {
 
 	words := strings.Split(strings.ToLower(input.Text), " ")
 
-	//fmt.Printf("%q\n", words)
 	m := map[string]int{}
 	for _, word := range words {
 		m[word] = m[word] + 1
