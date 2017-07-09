@@ -55,5 +55,5 @@ make rice
 
 ## Use API via Curl
 ```
-$ curl -X POST -F "text=This application returns a wordcount JSON object for use in an application" http://localhost:8888/api
+$ curl -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://localhost:8888/api
 ```
