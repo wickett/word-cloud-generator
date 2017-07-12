@@ -33,7 +33,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 // Test json with curl using this:
 // curl -H "Content-Type: application/json" -d '{"text":"this is a really really really important thing this is"}' http://localhost:8888/newapi
 
-func receiveJSON(w http.ResponseWriter, r *http.Request) {
+func receiveJSONHandler(w http.ResponseWriter, r *http.Request) {
 	var textIn TextSubmission
 
 	// don't allow huge uploads
@@ -62,7 +62,7 @@ func main() {
 	r := mux.NewRouter()
 	// routes
 	r.HandleFunc("/form", formHandler).Methods("POST")
-	r.HandleFunc("/api", receiveJSON).Methods("POST")
+	r.HandleFunc("/api", receiveJSONHandler).Methods("POST")
 
 	// serves up our static content like html
 	r.PathPrefix("/").Handler(http.FileServer(rice.MustFindBox("static").HTTPBox()))

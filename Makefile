@@ -14,6 +14,9 @@ start-mac: build
 rice:
 	@rice embed-go
 
+goconvey-install:
+	@go install github.com/smartystreets/goconvey
+
 goconvey:
 	$$GOPATH/bin/goconvey
 
