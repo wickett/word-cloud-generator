@@ -18,13 +18,6 @@ type TextSubmission struct {
 	Text  string `json:"text"`
 }
 
-func formHandler(w http.ResponseWriter, r *http.Request) {
-	text := r.FormValue("text")
-	t := wordyapi.TextToParse{Title: "hello", Text: text}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(wordyapi.ParseText(t))
-}
-
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("templates/upload.tmpl")
 	t.Execute(w, nil)
@@ -61,7 +54,6 @@ func receiveJSONHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 	// routes
-	r.HandleFunc("/form", formHandler).Methods("POST")
 	r.HandleFunc("/api", receiveJSONHandler).Methods("POST")
 
 	// serves up our static content like html
