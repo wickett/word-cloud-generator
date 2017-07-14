@@ -13,6 +13,7 @@ import (
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
 
+// TextSubmission is a json title and string to submit
 type TextSubmission struct {
 	Title string `json:"title"`
 	Text  string `json:"text"`
