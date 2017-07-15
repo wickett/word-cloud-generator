@@ -20,3 +20,6 @@
 artifacts/osx
 artifacts/windows
 artifacts/linux
+
+# gauntlt
+gauntlt/tmp/
