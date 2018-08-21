@@ -57,3 +57,10 @@ make rice
 ```
 $ curl -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://localhost:8888/api
 ```
+
+## Setup example
+Use this setup
+
+aws_access_key_id = EKIAIOSFODNN7EXAMPLE
+aws_secret_access_key = EJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
