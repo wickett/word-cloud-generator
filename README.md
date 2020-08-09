@@ -1,5 +1,5 @@
 # word-cloud-generator
-It's a golang web app that takes a block of text and turns it into a word cloud. 
+It's a golang web app that takes a block of text and turns it into a word cloud. If you like this class be sure to star the github repo! 
 
 ## Notice
 This project is under active development. This project is being created as a sample app for an upcoming training class on Continuous Delivery with Lynda.com. You can see previous courses we have made at https://lynda.com/JamesWickett. Thanks!
