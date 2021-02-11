@@ -6,11 +6,12 @@ This project is under active development. This project is being created as a sam
 
 ## Prerequisites
 1. Install go - https://golang.org/doc/install (Start learning go with the tour - http://tour.golang.org/)
-2. Set $GOPATH `export GOPATH="${HOME}/go"`
-3. Set $PATH `export PATH=$PATH:$(go env GOPATH)/bin`
-4. Install godep - `go get github.com/tools/godep`
-5. Install goconvey - `go get github.com/smartystreets/goconvey`
-5. Install rice - `go get github.com/GeertJohan/go.rice/rice`
+2. Run `go mod init github.com/wickett/word-cloud-generator` inside this repo to initialise as a go module.
+3. Set $GOPATH `export GOPATH="${HOME}/go"`
+4. Set $PATH `export PATH=$PATH:$(go env GOPATH)/bin`
+5. Install godep - `go get github.com/tools/godep`
+6. Install goconvey - `go get github.com/smartystreets/goconvey`
+7. Install rice - `go get github.com/GeertJohan/go.rice/rice`
 
 ## Git
 We use git hooks to standardize development on the project. Please run `make git-hooks` to get started.
