@@ -1,0 +1,21 @@
+jobs:
+  build:
+    executor:
+      name: go/default
+      tag: '1.16'
+    steps:
+      - checkout
+      - go/load-cache
+      - go/mod-download
+      - go/save-cache
+      - run:
+          name: Run
+          command: make build
+orbs:
+  go: circleci/go@1.7.0
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - build
+
