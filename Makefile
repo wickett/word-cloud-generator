@@ -1,6 +1,6 @@
 BINARY=word-cloud-generator
 
-all: clean godep test build
+all: clean test build
 
 lint: vet fmt
 	@golint $$(go list ./...|grep -v vendor)
@@ -28,10 +28,6 @@ goconvey-install:
 
 goconvey:
 	$$GOPATH/bin/goconvey -port=9999
-
-godep:
-	@echo "Restoring dependencies..."
-	@godep restore
 
 build:
 	@echo "Creating compiled builds in ./artifacts"
