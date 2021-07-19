@@ -20,9 +20,6 @@ run:
 start-mac: build
 	./artifacts/osx/word-cloud-generator
 
-rice:
-	@rice embed-go
-
 goconvey-install:
 	@go install github.com/smartystreets/goconvey
 
