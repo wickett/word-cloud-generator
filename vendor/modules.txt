@@ -1,9 +1,4 @@
-# github.com/GeertJohan/go.rice v0.0.0-20170420135705-c02ca9a983da
-## explicit
-github.com/GeertJohan/go.rice
-github.com/GeertJohan/go.rice/embedded
-# github.com/daaku/go.zipexe v0.0.0-20150329023125-a5fe2436ffcb
-## explicit
+# github.com/daaku/go.zipexe v1.0.0
 github.com/daaku/go.zipexe
 # github.com/gorilla/context v1.1.1
 ## explicit
@@ -13,4 +8,3 @@ github.com/gorilla/context
 github.com/gorilla/mux
 # github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1
 ## explicit
-github.com/kardianos/osext

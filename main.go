@@ -1,17 +1,29 @@
 package main
 
 import (
+	"embed"
 	"encoding/json"
 	"html/template"
 	"io"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"net/http"
 
-	rice "github.com/GeertJohan/go.rice"
 	mux "github.com/gorilla/mux"
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
+
+// serves up our static content like html
+//go:embed static
+var staticFiles embed.FS
+
+func staticHandler() http.Handler {
+	fsys := fs.FS(staticFiles)
+	contentStatic, _ := fs.Sub(fsys, "static")
+	return http.FileServer(http.FS(contentStatic))
+
+}
 
 // TextSubmission is a json title and string to submit
 type TextSubmission struct {
@@ -53,12 +65,11 @@ func receiveJSONHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
 	r := mux.NewRouter()
 	// routes
 	r.HandleFunc("/api", receiveJSONHandler).Methods("POST")
-
-	// serves up our static content like html
-	r.PathPrefix("/").Handler(http.FileServer(rice.MustFindBox("static").HTTPBox()))
+	r.Handle("/", staticHandler())
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8888", r))
