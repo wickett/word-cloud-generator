@@ -10,19 +10,19 @@ import (
 	"log"
 	"net/http"
 
-	mux "github.com/gorilla/mux"
 	"github.com/wickett/word-cloud-generator/wordyapi"
 )
 
 // serves up our static content like html
-//go:embed static
+//go:embed static/*
 var staticFiles embed.FS
 
-func staticHandler() http.Handler {
-	fsys := fs.FS(staticFiles)
-	contentStatic, _ := fs.Sub(fsys, "static")
-	return http.FileServer(http.FS(contentStatic))
-
+func getStaticFiles() http.FileSystem {
+	fsys, err := fs.Sub(staticFiles, "static")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return http.FS(fsys)
 }
 
 // TextSubmission is a json title and string to submit
@@ -66,11 +66,19 @@ func receiveJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	r := mux.NewRouter()
+	staticFs := http.FileServer(getStaticFiles())
+
+	mux := http.NewServeMux()
+
 	// routes
-	r.HandleFunc("/api", receiveJSONHandler).Methods("POST")
-	r.Handle("/", staticHandler())
+	mux.HandleFunc("/api", receiveJSONHandler)
+	mux.Handle("/", staticFs)
 
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8888", r))
+	err := http.ListenAndServe(":8888", mux)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
