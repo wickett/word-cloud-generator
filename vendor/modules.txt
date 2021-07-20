@@ -1,10 +1,6 @@
-# github.com/daaku/go.zipexe v1.0.0
-github.com/daaku/go.zipexe
 # github.com/gorilla/context v1.1.1
 ## explicit
 github.com/gorilla/context
 # github.com/gorilla/mux v1.4.1-0.20170621220733-8c683ee571b6
 ## explicit
 github.com/gorilla/mux
-# github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1
-## explicit
