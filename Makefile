@@ -3,7 +3,6 @@ BINARY=word-cloud-generator
 all: clean test build
 
 lint: vet fmt
-	@golint $$(go list ./...|grep -v vendor)
 
 vet:
 	@go vet $$(go list ./...|grep -v vendor)
