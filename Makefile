@@ -23,7 +23,7 @@ goconvey-install:
 	@go install github.com/smartystreets/goconvey
 
 goconvey:
-	$$GOPATH/bin/goconvey -port=9999
+	@goconvey -port=9999
 
 build:
 	@echo "Creating compiled builds in ./artifacts"
