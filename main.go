@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"io/fs"
@@ -67,8 +66,6 @@ func receiveJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	game_version := 3
-	fmt.Printf("Super Mario %s\n", game_version)
 	staticFs := http.FileServer(getStaticFiles())
 
 	mux := http.NewServeMux()
