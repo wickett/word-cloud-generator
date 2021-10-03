@@ -11,7 +11,7 @@ fmt:
 	@go fmt $$(go list ./...|grep -v vendor)
 
 test:
-	@go test $$(go list ./...|grep -v vendor)
+	@go test $$(go list ./...|grep -v vendor) -v
 
 run:
 	@go run main.go
