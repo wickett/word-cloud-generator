@@ -3,12 +3,13 @@ BINARY=word-cloud-generator
 all: clean test build
 
 lint: vet fmt
+	@echo "Linting finished using go vet && go fmt"
 
 vet:
-	@go vet $$(go list ./...|grep -v vendor)
+	go vet $$(go list ./...|grep -v vendor)
 
 fmt:
-	@go fmt $$(go list ./...|grep -v vendor)
+	go fmt $$(go list ./...|grep -v vendor)
 
 test:
 	@go test $$(go list ./...|grep -v vendor) -v
