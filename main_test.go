@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestAllCaps(t *testing.T) {
+func TestSimpleSentence(t *testing.T) {
 	result := testFixture(t, []byte(`{"Text":"TEST this is only a test"}`))
 
 	// Check the response body is what we expect.
@@ -19,7 +19,7 @@ func TestAllCaps(t *testing.T) {
 	}
 }
 
-func TestLoremIpsum(t *testing.T) {
+func TestLongPunc(t *testing.T) {
 	result := testFixture(t, []byte(`{"Text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sem integer vitae justo eget magna fermentum iaculis. Adipiscing at in tellus integer feugiat scelerisque varius morbi enim. Elementum sagittis vitae et leo duis ut. Posuere lorem ipsum dolor sit. Arcu dictum varius duis at. Ridiculus mus mauris vitae ultricies leo integer malesuada. Arcu non sodales neque sodales ut. Diam sollicitudin tempor id eu nisl nunc mi ipsum. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque. Morbi leo urna molestie at. Sit amet nisl purus in. Nisl tincidunt eget nullam non."}`))
 
 	// Check the response body is what we expect.
