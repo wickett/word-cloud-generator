@@ -33,6 +33,11 @@ make install
 make clean
 ```
 
+### Linting
+```
+make lint
+```
+
 ### Test Coverage
 ```
 make test
@@ -40,6 +45,7 @@ make test
 
 ### Visual Test Coverage
 ```
+make goconvey-install
 make goconvey
 ```
 
