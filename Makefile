@@ -14,6 +14,9 @@ fmt:
 test:
 	@go test $$(go list ./...|grep -v vendor) -v
 
+integration:
+	@curl -H "Content-Type: application/json" -d '{"text":"stars stars stars"}' http://localhost:8888/api | grep 3
+
 run:
 	@go run main.go
 
