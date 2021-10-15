@@ -6,10 +6,10 @@ import (
 )
 
 func TestParseText(t *testing.T) {
-	//	t.Error("This test failed")
 
-	// Send a string with mixed case
-	s := TextToParse{Title: "Sample", Text: "Test test test Test test test TEST"}
+	// Send a string with just two words
+	s := TextToParse{Title: "Sample", Text: "test test test"}
+
 	out := ParseText(s)
 
 	var v map[string]interface{}
@@ -19,8 +19,8 @@ func TestParseText(t *testing.T) {
 		t.Error("Got this error:", err)
 	}
 
-	// test to make sure it counted the variations of capitalization
-	if v["test"].(float64) != 7 {
-		t.Error("Expected 7 occurances of test, but got:", v)
+	// test to make sure it counted number of occurances
+	if v["test"].(float64) != 3 {
+		t.Error("Expected 3 occurances, but got:", v)
 	}
 }
