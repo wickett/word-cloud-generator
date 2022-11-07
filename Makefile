@@ -36,6 +36,14 @@ build:
 	@env GOOS=windows GOARCH=amd64 go build -o ./artifacts/windows/${BINARY} -v .
 	@ls -lR ./artifacts
 
+docker-build: build
+	@echo "Creating the docker on alpine linux"
+	docker build . -t word-cloud-generator
+
+docker-run:
+	@echo "Starting new container of word-cloud-generator listening on localhost:8888"
+	docker run -it --rm -p 8888:8888 word-cloud-generator
+
 clean:
 	@echo "Cleaning up previous builds"
 	@go clean
