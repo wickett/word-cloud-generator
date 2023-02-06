@@ -38,11 +38,15 @@ build:
 
 docker-build: build
 	@echo "Creating the docker on alpine linux"
-	docker build . -t word-cloud-generator
+	docker build . -t wickett/word-cloud-generator
 
 docker-run:
 	@echo "Starting new container of word-cloud-generator listening on localhost:8888"
-	docker run -it --rm -p 8888:8888 word-cloud-generator
+	docker run -it --rm -p 8888:8888 wickett/word-cloud-generator
+
+docker-push:
+	@echo "Pushing docker image to dockerhub"
+	docker push wickett/word-cloud-generator:latest
 
 clean:
 	@echo "Cleaning up previous builds"
