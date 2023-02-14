@@ -17,4 +17,4 @@ jobs:
     - name: Add SHORT_SHA env property with commit short sha
       run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wickett/word-cloud-generator:${GITHUB_ENV}-amd64
+      run: docker build . --file Dockerfile --tag wickett/word-cloud-generator:${SHORT_SHA}-amd64
