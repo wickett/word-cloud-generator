@@ -64,4 +64,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: wickett/word-cloud-generator:${SHORT_SHA}-amd64
+          tags: wickett/word-cloud-generator:$SHORT_SHA
