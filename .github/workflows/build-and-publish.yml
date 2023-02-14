@@ -22,13 +22,24 @@ jobs:
       run: make test
 
     - name: Test
-      run: make test    
+      run: make test
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v3
+      with:
+        name: word-cloud-generator
+        path: ./artifacts/linux/word-cloud-generator
+        retention-days: 2
 
   build-docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/download-artifact@v3
+      with:
+        name: word-cloud-generator
+        path: ./artifacts/linux/
     - name: Add SHORT_SHA env property with commit short sha
       run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
     - name: Build the Docker image
