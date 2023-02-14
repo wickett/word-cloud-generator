@@ -31,7 +31,7 @@ jobs:
         path: ./artifacts/linux/word-cloud-generator
         retention-days: 2
 
-   build-docker:
+  build-docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
