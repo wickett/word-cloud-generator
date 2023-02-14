@@ -35,12 +35,39 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/download-artifact@v3
-      with:
-        name: word-cloud-generator
-        path: ./artifacts/linux/
-    - name: Add SHORT_SHA env property with commit short sha
-      run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wickett/word-cloud-generator:${SHORT_SHA}-amd64
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+        
+      - 
+        name: Fetch binary
+        uses: actions/download-artifact@v3
+          with:
+          name: word-cloud-generator
+          path: ./artifacts/linux/
+              
+      - 
+        name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+        
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: word-cloud-generator:${SHORT_SHA}-amd64
