@@ -43,8 +43,8 @@ jobs:
         name: Fetch binary
         uses: actions/download-artifact@v3
           with:
-          name: word-cloud-generator
-          path: ./artifacts/linux/
+            name: word-cloud-generator
+            path: ./artifacts/linux/
               
       - 
         name: Add SHORT_SHA env property with commit short sha
